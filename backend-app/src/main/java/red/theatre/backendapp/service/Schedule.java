@@ -29,7 +29,7 @@ public class Schedule {
     private final FigureRepository figureRepository;
     private final Dates dates;
     public List<SimplePerformanceResponseDTO> getAllPerformances() {
-        List<Performance> allPerformances = performanceRepository.findAll();
+        List<Performance> allPerformances = performanceRepository.findAllByOrderByTimeDateAsc();
         return allPerformances.stream()
                 .map(performanceMapper::toSimpleResponse)
                 .toList();

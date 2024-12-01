@@ -1,12 +1,12 @@
 package red.theatre.backendapp.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import red.theatre.backendapp.dto.performance.FullPerformanceResponseDTO;
 import red.theatre.backendapp.dto.performance.SimplePerformanceResponseDTO;
+
 import red.theatre.backendapp.service.Schedule;
 
 import java.util.List;
@@ -17,11 +17,14 @@ import java.util.List;
 public class ScheduleController {
     private final Schedule schedule;
     @GetMapping
-    public List<SimplePerformanceResponseDTO> getAllPerformances() {
-        return schedule.getAllPerformances();
+    public ResponseEntity<List<SimplePerformanceResponseDTO>> getAllPerformances() {
+        List<SimplePerformanceResponseDTO> allPerformances = schedule.getAllPerformances();
+        return ResponseEntity.status(HttpStatus.OK).body(allPerformances);
     }
+
     @GetMapping("/{id}")
-    public FullPerformanceResponseDTO getPerformanceById(@PathVariable("id") Long id) {
-        return schedule.getPerformanceById(id);
+    public ResponseEntity<FullPerformanceResponseDTO> getPerformanceById(@PathVariable("id") Long id) {
+        FullPerformanceResponseDTO performanceById = schedule.getPerformanceById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(performanceById);
     }
 }
