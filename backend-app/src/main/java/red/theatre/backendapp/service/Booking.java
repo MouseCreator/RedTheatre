@@ -53,7 +53,7 @@ public class Booking {
             throw new ValidationException("Неможливо забронювати понад 100 місць.");
         }
         seatPositions = seatPositions.stream().distinct().toList();
-        List<Seat> seats = seatRepository.findAllByPerformanceAndPositions(seatPositions);
+        List<Seat> seats = seatRepository.findAllByPerformanceAndPositions(performanceId, seatPositions);
 
         validateSeats(seats);
         reserveAll(seats);

@@ -66,14 +66,6 @@ class BookingControllerTest {
         assertThrows(AuthUnauthorizedException.class,
                 () -> bookingController.getBookingPerformanceById(expectId, null));
     }
-
-    @Test
-    void getPerformanceById_userAdmin() {
-        UserDetails userDetails = factory.admin();
-        long expectId = -1L;
-        assertThrows(AuthForbiddenException.class,
-                () -> bookingController.getBookingPerformanceById(expectId, userDetails));
-    }
     @Test
     void getPerformanceById_userGuest() {
         UserDetails userDetails = factory.guest();

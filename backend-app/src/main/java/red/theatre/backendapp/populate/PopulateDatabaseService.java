@@ -101,10 +101,11 @@ public class PopulateDatabaseService {
                     .toList());
             Collections.shuffle(list);
             int j = Math.min(list.size(), dto.getNumberSeats());
-            List<Long> seats = new ArrayList<>();
+            List<Integer> seats = new ArrayList<>();
             for (int i = 0; i < j; i++) {
-                seats.add(list.get(i).getId());
+                seats.add(list.get(i).getPosition());
             }
+            bookingCreateDTO.setPerformanceId(performanceId);
             bookingCreateDTO.setSeats(seats);
             User user = activeData.users.stream().filter(u -> u.getLogin().equals(dto.getUserLogin())).findFirst().orElseThrow();
             UserDetails userDetails = new UserDetails();
