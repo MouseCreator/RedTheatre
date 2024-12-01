@@ -1,0 +1,230 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01
+      author: Mykhailo Tyshchenko
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: VARCHAR(31)
+                  defaultValue: client
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: theatre
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+			  - column:
+                  name: description
+                  type: VARCHAR(4095)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: figure
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: performance_details
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(4095)
+        - createTable:
+            tableName: performance
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: theatre_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: performance_details_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: performance_figure
+            columns:
+              - column:
+                  name: performance_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: figure_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: performance_theatre_fk
+            baseTableName: performance
+            baseColumnNames: theatre_id
+            referencedTableName: theatre
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            constraintName: performance_details_fk
+            baseTableName: performance
+            baseColumnNames: performance_details_id
+            referencedTableName: performance_details
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            constraintName: performance_figure_s_fk
+            baseTableName: performance_figure
+            baseColumnNames: performance_id
+            referencedTableName: performance
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            constraintName: performance_figure_f_fk
+            baseTableName: performance_figure
+            baseColumnNames: performance_id
+            referencedTableName: figure
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - createTable:
+            tableName: seat
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: performance_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(31)
+                  defaultValue: free
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: performance_seat_f_fk
+            baseTableName: seat
+            baseColumnNames: performance_id
+            referencedTableName: performance
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - createTable:
+            tableName: ticket
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: owner
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: performance_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(31)
+                  defaultValue: unpaid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: ticket_owner_fk
+            baseTableName: ticket
+            baseColumnNames: owner
+            referencedTableName: user
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            constraintName: ticket_performance_fk
+            baseTableName: ticket
+            baseColumnNames: performance_id
+            referencedTableName: performance
+            referencedColumnNames: id
+            onDelete: CASCADE

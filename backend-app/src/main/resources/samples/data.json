@@ -1,0 +1,262 @@
+{
+  "theatres": [
+    {
+      "name": "Теа",
+      "description": "Театр у Словенії",
+      "address": "Вулиця 1",
+      "numSeats": 20
+    },
+    {
+      "name": "Синій театр",
+      "description": "Театр 2",
+      "address": "Вулиця 2",
+      "numSeats": 40
+    },
+    {
+      "name": "Театр молоді",
+      "description": "Театр 3",
+      "address": "Вулиця 3",
+      "numSeats": 60
+    },
+    {
+      "name": "Театр Драми та Комедії",
+      "description": "Театр 4",
+      "address": "Вулиця 4",
+      "numSeats": 80
+    },
+    {
+      "name": "Національний академічний театр опери та балету України імені Тараса Шевченка",
+      "description": "Театр 5",
+      "address": "Вулиця 5",
+      "numSeats": 110
+    }
+  ],
+  "performance_details": [
+    {
+      "name": "Я",
+      "description": "",
+      "pictureUrl": "https://t4.ftcdn.net/jpg/01/82/29/77/360_F_182297712_9CsfAgraiubHa1ZgwCtXzIIwwFTUcfUc.jpg"
+    },
+    {
+      "name": "Гріх",
+      "description": "Автор: Володимир Винниченко",
+      "pictureUrl": "https://teatr.cn.ua/wp-content/uploads/2023/10/grih-chernihiv-theatre-2023_010.jpg"
+    },{
+      "name": "Кабаре",
+      "description": "Мюзикл",
+      "pictureUrl": "https://www.molodyytheatre.com/sites/default/files/styles/slider/public/repertoire/1_218.jpg?itok=2qDDUJY-"
+    },{
+      "name": "Місто Сонця",
+      "description": "Утопія кохання на 2 дії",
+      "pictureUrl": "https://www.molodyytheatre.com/sites/default/files/styles/slider/public/repertoire/solnes5.jpg?itok=zAGSgCP4"
+    },{
+      "name": "Сон літньої ночі",
+      "description": "Аскетична комедія",
+      "pictureUrl": "https://www.molodyytheatre.com/sites/default/files/styles/slider/public/repertoire/max_6.jpg?itok=eOo6iaHy"
+    },{
+      "name": "Убити чи любити",
+      "description": "Інтригуюча комедія",
+      "pictureUrl": "https://www.molodyytheatre.com/sites/default/files/styles/slider/public/repertoire/u2_0.jpg?itok=PDuVGq-1"
+    },{
+      "name": "Дім, де розбиваються серця",
+      "description": "Автор: Бернард Шоу",
+      "pictureUrl": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDp2c3FClnzab9deVzzgR6nvEoJVTtGT8WFeJdOZ1fIKZcv_LP3os1zMH5R4it2Tzs61mZUZfcAX6LpOzy7R4jMzcLniphb1NNFZ1sQvxSeyKKFcfrZq498f-hZQfC6py8wdY3kF6Z/s1600/heartbreak.JPG"
+    },{
+      "name": "Великий льох, або Історія, розказана трьома привидами, котрі шукають правди у своїй загибелі",
+      "description": "Автор: Тарас Шевченко",
+      "pictureUrl": "https://i1.poltava.to/uploads/2021/12/13/241731282_5981329581937561_306772332210008848_n.jpg"
+    }
+  ],
+  "figures": [
+    {
+      "name": "Ян Вус",
+      "role": "director"
+    },
+    {
+      "name": "Дмитро Карп’юк",
+      "role": "director"
+    },
+    {
+      "name": "Людмила Зеленчук",
+      "role": "director"
+    },
+    {
+      "name": "Пантелеймон Петренко-Констянтинов",
+      "role": "director"
+    },
+    {
+      "name": "Наталія Вишневська",
+      "role": "actor"
+    },
+    {
+      "name": "Олександр Бурмич",
+      "role": "actor"
+    },
+    {
+      "name": "Тимофій Лебединець",
+      "role": "actor"
+    },
+    {
+      "name": "Марина Гайворонська",
+      "role": "actor"
+    },
+    {
+      "name": "Богдан Струмінський",
+      "role": "actor"
+    },
+    {
+      "name": "Олена Долинська",
+      "role": "actor"
+    },
+    {
+      "name": "Іван Чернецький",
+      "role": "actor"
+    },
+    {
+      "name": "Ганна Левченко",
+      "role": "actor"
+    },
+    {
+      "name": "Максим Горовий",
+      "role": "actor"
+    },
+    {
+      "name": "Ольга Підопригора",
+      "role": "actor"
+    },
+    {
+      "name": "Юрій Соловейчук",
+      "role": "actor"
+    },
+    {
+      "name": "Ірина Гречана",
+      "role": "actor"
+    },
+    {
+      "name": "Андрій Лозовик",
+      "role": "actor"
+    }
+  ],
+  "schedule": [
+    {
+      "theatreId": 1,
+      "detailsId": 1,
+      "date": "2024-03-12 12:00:00",
+      "director": 1,
+      "numberFigures": 1
+    }, {
+      "theatreId": 2,
+      "detailsId": 2,
+      "date": "2024-03-12 13:00:00",
+      "director": 2,
+      "numberFigures": 3
+    }, {
+      "theatreId": 3,
+      "detailsId": 3,
+      "date": "2024-03-12 14:00:00",
+      "director": 3,
+      "numberFigures": 7
+    }, {
+      "theatreId": 4,
+      "detailsId": 4,
+      "date": "2024-03-12 15:00:00",
+      "director": 4,
+      "numberFigures": 10
+    },
+    {
+      "theatreId": 5,
+      "detailsId": 8,
+      "date": "2024-03-12 16:00:00",
+      "director": 4,
+      "numberFigures": 13
+    },
+    {
+      "theatreId": 1,
+      "detailsId": 5,
+      "date": "2024-03-12 17:00:00",
+      "director": 3,
+      "numberFigures": 10
+    },
+    {
+      "theatreId": 2,
+      "detailsId": 6,
+      "date": "2024-03-12 18:00:00",
+      "director": 3,
+      "numberFigures": 8
+    },{
+      "theatreId": 3,
+      "detailsId": 7,
+      "date": "2024-03-12 19:00:00",
+      "director": 1,
+      "numberFigures": 5
+    }
+  ],
+  "users": [
+    {
+      "name": "Михайло",
+      "role": "client"
+    },
+    {
+      "name": "Юлія",
+      "role": "client"
+    },{
+      "name": "Анастасія",
+      "role": "client"
+    },
+    {
+      "name": "Таїсія",
+      "role": "client"
+    },
+    {
+      "name": "Він",
+      "role": "client"
+    },
+    {
+      "name": "Вона",
+      "role": "client"
+    },
+    {
+      "name": "Петро",
+      "role": "client"
+    },
+    {
+      "name": "Іван",
+      "role": "admin"
+    }
+  ],
+  "tickets": [
+    {
+      "userLogin": "Він",
+      "performanceId": 2,
+      "numberSeats": 10
+    },
+    {
+      "userLogin": "Михайло",
+      "performanceId": 2,
+      "numberSeats": 2
+    },
+    {
+      "userLogin": "Вона",
+      "performanceId": 3,
+      "numberSeats": 15
+    },{
+      "userLogin": "Юлія",
+      "performanceId": 3,
+      "numberSeats": 3
+    },{
+      "userLogin": "Анастасія",
+      "performanceId": 4,
+      "numberSeats": 4
+    },
+    {
+      "userLogin": "Таїсія",
+      "performanceId": 6,
+      "numberSeats": 4
+    },
+    {
+      "userLogin": "Він",
+      "performanceId": 7,
+      "numberSeats": 40
+    }
+  ]
+}
