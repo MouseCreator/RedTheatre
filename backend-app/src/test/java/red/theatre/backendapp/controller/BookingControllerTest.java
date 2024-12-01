@@ -50,7 +50,15 @@ class BookingControllerTest {
         assertEquals(0, body.getTotalPrice().compareTo(Defines.SEAT_PRICE.multiply(new BigDecimal("3"))));
         assertEquals(userDetails.getLogin(), body.getOwnerName());
     }
-
+    @Test
+    void bookTicket_1() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(6));
+        ResponseEntity<TicketResponseDTO> entity = bookingController.bookTicket(bookingCreateDTO, userDetails);
+        assertEquals(HttpStatus.CREATED, entity.getStatusCode());
+        TicketResponseDTO body = entity.getBody();
+        assertEquals(1, body.getSeatNumbers().size());
+    }
     @Test
     void bookTicket_100() {
         UserDetails userDetails = factory.client();
