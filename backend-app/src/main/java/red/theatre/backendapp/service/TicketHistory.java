@@ -73,7 +73,7 @@ public class TicketHistory {
 
 
     private void validateOwner(UserDetails userDetails, Ticket ticket) {
-        if (!Objects.equals(userDetails.getId(), ticket.getId())) {
+        if (!Objects.equals(userDetails.getId(), ticket.getOwner().getId())) {
             throw new AuthForbiddenException("Тільки власник квитка має право змінювати квиток!");
         }
     }
