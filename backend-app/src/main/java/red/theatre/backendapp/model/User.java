@@ -17,7 +17,8 @@ public class User {
     private Long id;
     @Nonnull
     @Length(min = 1, max = 255)
-    private String name;
+    @Column(name = "login", unique = true)
+    private String login;
     @Nonnull
     @Column(nullable = false, columnDefinition = "VARCHAR(31) DEFAULT 'client'")
     private String role;

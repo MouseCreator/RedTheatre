@@ -28,4 +28,6 @@ public class Seat {
     private String status;
     @DecimalMin(value = "0.00")
     private BigDecimal price;
+    @Nonnull
+    private Integer position;
 }
