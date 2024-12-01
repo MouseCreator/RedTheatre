@@ -24,12 +24,12 @@ public class TicketController {
 
     @PutMapping
     public TicketResponseDTO payForTicket(@RequestBody TicketChangeStatusDTO dto,
-                                          @RequestAttribute UserDetails userDetails) {
+                                          @RequestAttribute("user") UserDetails userDetails) {
         return ticketHistory.updateTicket(userDetails, dto);
     }
     @PutMapping("/pay/{id}")
     public TicketResponseDTO payForTicket(@PathVariable("id") Long ticket,
-                                          @RequestAttribute UserDetails userDetails) {
+                                          @RequestAttribute("user") UserDetails userDetails) {
         TicketChangeStatusDTO ticketChangeStatusDTO = new TicketChangeStatusDTO();
         ticketChangeStatusDTO.setTicketId(ticket);
         ticketChangeStatusDTO.setStatus(TicketStatuses.PAID);
@@ -39,7 +39,7 @@ public class TicketController {
     @DeleteMapping("/cancel/{id}")
     public ResponseEntity<Void> cancelTicket(
             @PathVariable("id") Long ticket,
-                                       @RequestAttribute UserDetails userDetails) {
+                                       @RequestAttribute("user") UserDetails userDetails) {
         TicketChangeStatusDTO ticketChangeStatusDTO = new TicketChangeStatusDTO();
         ticketChangeStatusDTO.setTicketId(ticket);
         ticketChangeStatusDTO.setStatus(TicketStatuses.CANCELLED);
