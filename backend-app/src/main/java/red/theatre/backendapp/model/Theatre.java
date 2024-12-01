@@ -28,6 +28,6 @@ public class Theatre {
     private String address;
     @Nonnull
     @Min(value = 10)
-    @Max(value = 4000)
+    @Max(value = 1000)
     private Integer numSeats;
 }
