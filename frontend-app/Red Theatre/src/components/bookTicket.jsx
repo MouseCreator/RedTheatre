@@ -58,12 +58,10 @@ export default function Bookticket() {
   const confirmBooking = () => {
   
     setIsModalVisible(false);
-    
+
     const bookingData = {
       scheduleId: id,
-      totalPrice: price,
-      seatCount: count,
-      selectedSeats: seats.filter((seat) => seat.status === "selected"),
+      selectedSeats: seats.filter((seat) => seat.status === "selected").map((seat)=>seat.position),
     };
 
     fetch("http://localhost:8080/booking", {
