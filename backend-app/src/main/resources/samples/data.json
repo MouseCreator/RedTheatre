@@ -204,6 +204,10 @@
       "role": "client"
     },
     {
+      "name": "Таїсія",
+      "role": "client"
+    },
+    {
       "name": "Він",
       "role": "client"
     },
@@ -237,7 +241,7 @@
       "numberSeats": 4
     },
     {
-      "userLogin": "Анастасія",
+      "userLogin": "Таїсія",
       "performanceId": 6,
       "numberSeats": 4
     },

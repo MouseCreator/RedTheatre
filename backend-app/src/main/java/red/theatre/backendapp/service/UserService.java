@@ -9,6 +9,8 @@ import red.theatre.backendapp.mapper.UserMapper;
 import red.theatre.backendapp.model.User;
 import red.theatre.backendapp.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -34,5 +36,9 @@ public class UserService {
     public User populate(UserCreateDTO userCreateDTO) {
         User user = userMapper.toUser(userCreateDTO);
         return userRepository.save(user);
+    }
+
+    public Optional<User> findByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
 }
