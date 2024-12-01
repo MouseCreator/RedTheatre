@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import red.theatre.backendapp.dto.user.UserDetails;
+import red.theatre.backendapp.dto.user.UserResponseDTO;
 import red.theatre.backendapp.model.User;
 import red.theatre.backendapp.service.UserService;
 
@@ -31,7 +32,7 @@ public class AuthFilter  extends OncePerRequestFilter {
         String header = request.getHeader(AUTHORIZATION_HEADER);
 
         if (header != null && header.isEmpty()) {
-            UserDetails userDetails = UserDetails.guest();
+            UserDetails userDetails = mockUser();
             request.setAttribute("user", userDetails);
         } else {
             UserDetails userDetails = new UserDetails();
@@ -49,5 +50,14 @@ public class AuthFilter  extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private UserDetails mockUser() {
+        UserResponseDTO userById = userService.getUserById(7L);
+        UserDetails userDetails = new UserDetails();
+        userDetails.setLogin(userById.getLogin());
+        userDetails.setId(userById.getId());
+        userDetails.setRole(userById.getRole());
+        return userDetails;
     }
 }

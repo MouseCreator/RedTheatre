@@ -36,8 +36,8 @@ public class Booking {
     private final PerformanceRepository performanceRepository;
     @Transactional
     public TicketResponseDTO bookSeats(UserDetails userDetails, BookingCreateDTO bookingCreateDTO) {
-        Long userId = userDetails.getId();
         UD.validateClient(userDetails);
+        Long userId = userDetails.getId();
         if (bookingCreateDTO == null) {
             throw new ValidationException("Порожній запит");
         }
@@ -87,7 +87,7 @@ public class Booking {
         }
         Integer first = invalidSeats.getFirst();
         if (invalidSeats.size()==1) {
-            throw new ValidationException("Театральний зал не має місця з номером " + first);
+            throw new DataNotFoundException("Театральний зал не має місця з номером " + first);
         }
         StringBuilder builder = new StringBuilder("Театральний зал не має місць з номерами ");
         builder.append(first);
@@ -95,7 +95,7 @@ public class Booking {
             builder.append(", ");
             builder.append(invalidSeats.get(i));
         }
-        throw new ValidationException(builder.toString());
+        throw new DataNotFoundException(builder.toString());
     }
 
     private Ticket saveTicket(User user, List<Seat> reserved) {

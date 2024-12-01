@@ -10,6 +10,7 @@ import red.theatre.backendapp.dto.book.BookingCreateDTO;
 import red.theatre.backendapp.dto.performance.FullPerformanceResponseDTO;
 import red.theatre.backendapp.dto.ticket.TicketResponseDTO;
 import red.theatre.backendapp.dto.user.UserDetails;
+import red.theatre.backendapp.exception.AuthForbiddenException;
 import red.theatre.backendapp.exception.AuthUnauthorizedException;
 import red.theatre.backendapp.exception.DataNotFoundException;
 import red.theatre.backendapp.exception.ValidationException;
@@ -133,7 +134,7 @@ class BookingControllerTest {
     void bookTicket_negativeSeatPosition() {
         UserDetails userDetails = factory.client();
         BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(-1));
-        assertThrows(ValidationException.class,
+        assertThrows(DataNotFoundException.class,
                 () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
     }
 
@@ -141,7 +142,7 @@ class BookingControllerTest {
     void bookTicket_overflowSeatPosition() {
         UserDetails userDetails = factory.client();
         BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(1000));
-        assertThrows(ValidationException.class,
+        assertThrows(DataNotFoundException.class,
                 () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
     }
     @Test
@@ -150,5 +151,36 @@ class BookingControllerTest {
         BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(-1L, List.of(1));
         assertThrows(DataNotFoundException.class,
                 () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+    }
+
+    @Test
+    void bookTicket_emptyAuth() {
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(1));
+        assertThrows(AuthUnauthorizedException.class,
+                () -> bookingController.bookTicket(bookingCreateDTO, null));
+    }
+
+    @Test
+    void bookTicket_adminAuth() {
+        UserDetails userDetails = factory.admin();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(1));
+        assertThrows(AuthForbiddenException.class,
+                () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+    }
+
+    @Test
+    void bookTicket_GuestAuth() {
+        UserDetails userDetails = factory.guest();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(1));
+        assertThrows(AuthUnauthorizedException.class,
+                () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+    }
+
+    @Test
+    void bookTicket_alreadyBooked() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(4));
+        bookingController.bookTicket(bookingCreateDTO, userDetails);
+        assertThrows(ValidationException.class, ()-> bookingController.bookTicket(bookingCreateDTO, userDetails));
     }
 }
