@@ -12,8 +12,8 @@ import red.theatre.backendapp.repository.TheatreRepository;
 public class TheatreService {
     private final TheatreMapper theatreMapper;
     private final TheatreRepository theatreRepository;
-    public void createTheatre(TheatreCreateDTO theatreCreateDTO) {
+    public Theatre createTheatre(TheatreCreateDTO theatreCreateDTO) {
         Theatre theatre = theatreMapper.fromCreateDTO(theatreCreateDTO);
-        theatreRepository.save(theatre);
+        return theatreRepository.save(theatre);
     }
 }

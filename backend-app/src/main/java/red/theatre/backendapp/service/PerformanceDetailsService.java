@@ -13,8 +13,8 @@ public class PerformanceDetailsService {
     private final PerformanceDetailsMapper performanceDetailsMapper;
     private final PerformanceDetailsRepository performanceDetailsRepository;
 
-    public void createPerformanceDetails(PerformanceDetailsCreateDTO createDTO) {
+    public PerformanceDetails createPerformanceDetails(PerformanceDetailsCreateDTO createDTO) {
         PerformanceDetails performanceDetails = performanceDetailsMapper.fromCreateDTO(createDTO);
-        performanceDetailsRepository.save(performanceDetails);
+        return performanceDetailsRepository.save(performanceDetails);
     }
 }

@@ -215,41 +215,34 @@
   "tickets": [
     {
       "userLogin": "Він",
-      "status": "paid",
       "performanceId": 2,
       "numberSeats": 10
     },
     {
       "userLogin": "Михайло",
-      "status": "paid",
       "performanceId": 2,
       "numberSeats": 2
     },
     {
       "userLogin": "Вона",
-      "status": "unpaid",
       "performanceId": 3,
       "numberSeats": 15
     },{
       "userLogin": "Юлія",
-      "status": "paid",
       "performanceId": 3,
       "numberSeats": 3
     },{
       "userLogin": "Анастасія",
-      "status": "paid",
       "performanceId": 4,
       "numberSeats": 4
     },
     {
       "userLogin": "Анастасія",
-      "status": "paid",
       "performanceId": 6,
       "numberSeats": 4
     },
     {
       "userLogin": "Він",
-      "status": "paid",
       "performanceId": 7,
       "numberSeats": 40
     }

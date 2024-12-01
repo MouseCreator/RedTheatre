@@ -7,6 +7,6 @@ public class PerformancePopulateDTO {
     private Long theatreId;
     private Long detailsId;
     private String date;
-    private String director;
+    private Long director;
     private Long numberFigures;
 }

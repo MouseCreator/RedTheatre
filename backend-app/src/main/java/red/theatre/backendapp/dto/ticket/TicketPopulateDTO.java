@@ -6,6 +6,5 @@ import lombok.Data;
 public class TicketPopulateDTO {
     private String userLogin;
     private Long performanceId;
-    private Integer numSeats;
-    private String status;
+    private Integer numberSeats;
 }

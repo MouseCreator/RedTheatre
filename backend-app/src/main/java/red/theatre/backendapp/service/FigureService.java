@@ -12,8 +12,8 @@ import red.theatre.backendapp.repository.FigureRepository;
 public class FigureService {
     private final FigureRepository figureRepository;
     public final FigureMapper figureMapper;
-    public void createFigure(FigureCreateDTO figureCreateDTO) {
+    public Figure createFigure(FigureCreateDTO figureCreateDTO) {
         Figure figure = figureMapper.fromCreateDTO(figureCreateDTO);
-        figureRepository.save(figure);
+        return figureRepository.save(figure);
     }
 }

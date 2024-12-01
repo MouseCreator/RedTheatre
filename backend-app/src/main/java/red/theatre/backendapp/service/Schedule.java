@@ -82,6 +82,7 @@ public class Schedule {
             Figure figure = figureRepository.findById(figureId)
                     .orElseThrow(()->new DataNotFoundException("Не існує театрального діяча з ідентифікатором: " + figureId));
             PerformanceFigure performanceFigure = new PerformanceFigure(performance, figure);
+            performanceFigure.setId(new PFKey(performance.getId(), figureId));
             performanceFigureRepository.save(performanceFigure);
             figureList.add(figure);
         }
