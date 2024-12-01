@@ -3,6 +3,7 @@ package red.theatre.backendapp.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import red.theatre.backendapp.defines.SeatStatuses;
 import red.theatre.backendapp.defines.TicketStatuses;
 import red.theatre.backendapp.dto.book.BookingCreateDTO;
 import red.theatre.backendapp.dto.ticket.TicketResponseDTO;
@@ -64,7 +65,7 @@ public class Booking {
 
     private void reserveAll(List<Seat> seatsToBook) {
         for (Seat seat : seatsToBook) {
-            seat.setStatus("reserved");
+            seat.setStatus(SeatStatuses.RESERVED);
         }
     }
 
