@@ -49,4 +49,12 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.of(message);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleEntityNotFoundException(RuntimeException ex) {
+        String message = ex.getMessage();
+        log.error(message, ex);
+        ErrorResponse errorResponse = ErrorResponse.of("Помилка сервера");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
 }
