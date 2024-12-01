@@ -10,12 +10,14 @@ import red.theatre.backendapp.dto.user.UserResponseDTO;
 import red.theatre.backendapp.service.UserService;
 
 @RestController
-@RequestMapping("/users")
 @RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
     @PostMapping
     public UserResponseDTO registerUser(@RequestBody UserCreateDTO userCreateDTO) {
         return userService.createUser(userCreateDTO);
     }
+
+
 }
