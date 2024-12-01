@@ -2,11 +2,10 @@ package red.theatre.backendapp.model;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +35,6 @@ public class Ticket {
     @Nonnull
     @Column(name = "`created_at`")
     private LocalDateTime createdAt;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Seat> seatList;
 }

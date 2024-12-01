@@ -11,7 +11,6 @@ public class FullPerformanceResponseDTO {
     private String theatreName;
     private String performanceName;
     private String date;
-    private String director;
-    private List<String> actors;
+    private List<String> figures;
     private List<SeatResponseDTO> seats;
 }

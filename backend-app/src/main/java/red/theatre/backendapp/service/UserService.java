@@ -15,14 +15,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private static DataNotFoundException notFound(String type, Object object) {
-        return new DataNotFoundException("Cannot find user by " + type + ":" + object);
+        return new DataNotFoundException("Неможливо знайти користувача за " + type + ":" + object);
     }
     public UserResponseDTO getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(()->notFound("id", id));
+        User user = userRepository.findById(id).orElseThrow(()->notFound("ідентифікатором", id));
         return userMapper.toResponse(user);
     }
     public UserResponseDTO getUserByLogin(String login) {
-        User user = userRepository.findByLogin(login).orElseThrow(()->notFound("login", login));
+        User user = userRepository.findByLogin(login).orElseThrow(()->notFound("логіном", login));
         return userMapper.toResponse(user);
     }
     public UserResponseDTO createUser(UserCreateDTO userCreateDTO) {

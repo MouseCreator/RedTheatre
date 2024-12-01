@@ -20,4 +20,9 @@ public class PerformanceFigure {
     @MapsId("figureId")
     @JoinColumn(name = "figure_id")
     private Figure figure;
+
+    public PerformanceFigure(Performance performance, Figure figure) {
+        this.performance = performance;
+        this.figure = figure;
+    }
 }
