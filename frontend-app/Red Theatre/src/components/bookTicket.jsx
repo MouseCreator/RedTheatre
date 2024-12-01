@@ -1,6 +1,7 @@
 import "../booking.css";
 import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
+import { Toast, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import BookingModal from "./BookingModal";
 import axios from "axios";
@@ -12,6 +13,10 @@ export default function Bookticket() {
   const [count, setCount] = useState(0);
   const [price, setPrice] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false); // Modal visibility
+
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const ref = useRef(null);
   const navigate = useNavigate();
   let clicked = false;
@@ -65,17 +70,21 @@ export default function Bookticket() {
       seats: seats.filter((seat) => seat.status === "selected").map((seat)=>seat.position),
     };
 
-    axios.post("http://localhost:8080/booking", bookingData, {
+    axios
+    .post("http://localhost:8080/booking", bookingData, {
       headers: { "Content-Type": "application/json" },
     })
-      .then((response) => {
-        console.log("Booking successful:", response.data);
-        navigate('/profile')
-      })
-      .catch((error) => {
-        console.error("Error creating booking:", error);
-      });
-    
+    .then((response) => {
+      console.log("Booking successful:", response.data);
+      navigate("/profile");
+    })
+    .catch((error) => {
+      console.error("Error creating booking:", error);
+      setErrorMessage(
+        error.response?.data?.message || "Failed to create booking."
+      );
+      setShowError(true);
+    });
   };
 
 
@@ -195,6 +204,19 @@ export default function Bookticket() {
         onConfirm={confirmBooking}
         onClose={closeModal}
       /> : null}
+
+<Toast
+        onClose={() => setShowError(false)}
+        show={showError}
+        delay={3000}
+        autohide
+        className="position-fixed bottom-0 end-0 m-3"
+      >
+        <Toast.Header>
+          <strong className="me-auto">Booking Error</strong>
+        </Toast.Header>
+        <Toast.Body>{errorMessage}</Toast.Body>
+      </Toast>
 
 
     </div>
