@@ -25,7 +25,8 @@ public class PerformanceMapperImpl implements PerformanceMapper {
         simple.setDate(date);
         simple.setPerformanceName(performance.getDetails().getName());
         simple.setTheatreName(performance.getTheatre().getName());
-
+        simple.setPictureUrl(performance.getDetails().getPictureUrl());
+        simple.setDirector(performance.getDirector().getName());
         return simple;
     }
 
@@ -41,9 +42,11 @@ public class PerformanceMapperImpl implements PerformanceMapper {
         full.setPerformanceName(performance.getDetails().getName());
         full.setTheatreName(performance.getTheatre().getName());
         List<String> names = actors.stream().map(Figure::getName).toList();
-        full.setFigures(names);
+        full.setDirector(performance.getDirector().getName());
+        full.setActors(names);
         List<SeatResponseDTO> seatsResponse = seats.stream().map(seatMapper::toResponse).toList();
         full.setSeats(seatsResponse);
+        full.setPictureUrl(performance.getDetails().getPictureUrl());
 
         return full;
     }

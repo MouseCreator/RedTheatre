@@ -8,4 +8,6 @@ public class SimplePerformanceResponseDTO {
     private String theatreName;
     private String performanceName;
     private String date;
+    private String pictureUrl;
+    private String director;
 }

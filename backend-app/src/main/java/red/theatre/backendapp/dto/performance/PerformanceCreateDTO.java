@@ -10,5 +10,6 @@ public class PerformanceCreateDTO {
     private Long theatreId;
     private Long detailsId;
     private String date;
+    private String pictureUrl;
     private List<Long> figures;
 }

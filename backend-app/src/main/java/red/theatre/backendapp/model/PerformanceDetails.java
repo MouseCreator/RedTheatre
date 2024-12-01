@@ -20,4 +20,6 @@ public class PerformanceDetails {
     private String name;
     @Length(max = 4095)
     private String description;
+    @Column(name = "picture_url")
+    private String pictureUrl;
 }

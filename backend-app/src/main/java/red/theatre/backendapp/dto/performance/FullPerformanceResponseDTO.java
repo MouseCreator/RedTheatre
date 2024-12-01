@@ -10,7 +10,9 @@ public class FullPerformanceResponseDTO {
     private Long id;
     private String theatreName;
     private String performanceName;
+    private String pictureUrl;
     private String date;
-    private List<String> figures;
+    private String director;
+    private List<String> actors;
     private List<SeatResponseDTO> seats;
 }

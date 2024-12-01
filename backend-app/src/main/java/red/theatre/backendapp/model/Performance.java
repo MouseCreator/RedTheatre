@@ -27,4 +27,8 @@ public class Performance {
     @Column(name="date_time")
     @Nonnull
     private LocalDateTime timeDate;
+    @Nonnull
+    @ManyToOne
+    @JoinColumn(name="director")
+    private Figure director;
 }
