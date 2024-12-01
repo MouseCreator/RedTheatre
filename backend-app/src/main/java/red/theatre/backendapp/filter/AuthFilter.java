@@ -31,7 +31,7 @@ public class AuthFilter  extends OncePerRequestFilter {
                                     @Nonnull FilterChain filterChain) throws ServletException, IOException {
         String header = request.getHeader(AUTHORIZATION_HEADER);
 
-        if (header != null && header.isEmpty()) {
+        if (header == null || header.isEmpty()) {
             UserDetails userDetails = mockUser();
             request.setAttribute("user", userDetails);
         } else {
