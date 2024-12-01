@@ -10,13 +10,13 @@ import red.theatre.backendapp.dto.book.BookingCreateDTO;
 import red.theatre.backendapp.dto.performance.FullPerformanceResponseDTO;
 import red.theatre.backendapp.dto.ticket.TicketResponseDTO;
 import red.theatre.backendapp.dto.user.UserDetails;
-import red.theatre.backendapp.exception.AuthForbiddenException;
 import red.theatre.backendapp.exception.AuthUnauthorizedException;
 import red.theatre.backendapp.exception.DataNotFoundException;
-import red.theatre.backendapp.service.Dates;
+import red.theatre.backendapp.exception.ValidationException;
 import red.theatre.backendapp.utils.UserDetailsFactory;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookingControllerTest {
     @Autowired
     private BookingController bookingController;
-    @Autowired
-    private Dates dates;
     @Autowired
     private UserDetailsFactory factory;
 
@@ -53,6 +51,22 @@ class BookingControllerTest {
     }
 
     @Test
+    void bookTicket_100() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO();
+        bookingCreateDTO.setPerformanceId(5L);
+        List<Integer> seats = new ArrayList<>();
+        for (int i = 1; i <= 100; i++) {
+            seats.add(i);
+        }
+        bookingCreateDTO.setSeats(seats);
+        ResponseEntity<TicketResponseDTO> entity = bookingController.bookTicket(bookingCreateDTO, userDetails);
+        assertEquals(HttpStatus.CREATED, entity.getStatusCode());
+        TicketResponseDTO body = entity.getBody();
+        assertEquals(100, body.getSeatNumbers().size());
+    }
+
+    @Test
     void getPerformanceById_invalidId() {
         UserDetails userDetails = factory.client();
         long expectId = -1L;
@@ -72,5 +86,69 @@ class BookingControllerTest {
         long expectId = 1L;
         assertThrows(AuthUnauthorizedException.class,
                 () -> bookingController.getBookingPerformanceById(expectId, userDetails));
+    }
+
+    @Test
+    void bookTicket_nullSeats() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, null);
+        assertThrows(ValidationException.class, () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+    }
+
+    @Test
+    void bookTicket_emptySeats() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of());
+        assertThrows(ValidationException.class, () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+    }
+
+    @Test
+    void bookTicket_nullPerformance() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, null);
+        assertThrows(ValidationException.class, () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+    }
+
+    @Test
+    void bookTicket_nullRequest() {
+        UserDetails userDetails = factory.client();
+        assertThrows(ValidationException.class, () -> bookingController.bookTicket(null, userDetails));
+    }
+
+    @Test
+    void bookTicket_101() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO();
+        bookingCreateDTO.setPerformanceId(5L);
+        List<Integer> seats = new ArrayList<>();
+        for (int i = 1; i <= 101; i++) {
+            seats.add(i);
+        }
+        bookingCreateDTO.setSeats(seats);
+        assertThrows(ValidationException.class,
+                () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+    }
+
+    @Test
+    void bookTicket_negativeSeatPosition() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(-1));
+        assertThrows(ValidationException.class,
+                () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+    }
+
+    @Test
+    void bookTicket_overflowSeatPosition() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(1000));
+        assertThrows(ValidationException.class,
+                () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+    }
+    @Test
+    void bookTicket_negativePerformance() {
+        UserDetails userDetails = factory.client();
+        BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(-1L, List.of(1));
+        assertThrows(DataNotFoundException.class,
+                () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
     }
 }
