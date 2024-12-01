@@ -39,7 +39,7 @@ function UnifiedNavbar() {
   </Nav>
 
   <Nav className="ms-auto">
-    <Nav.Link href="/personal-cabinet">Особистий кабінет</Nav.Link>
+    <Nav.Link href="/profile">Особистий кабінет</Nav.Link>
   </Nav>
 </Navbar.Collapse>
 

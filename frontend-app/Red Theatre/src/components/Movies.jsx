@@ -50,9 +50,9 @@ function Movies() {
                   {performance.theatreName}
                 </Card.Subtitle>
                 <Card.Text>
-                  <strong>Director:</strong> {performance.director}
+                  <strong>Режисер:</strong> {performance.director}
                   <br />
-                  <strong>Date:</strong> {performance.date}
+                  <strong>Дата:</strong> {performance.date}
                   <br />
                 </Card.Text>
                 <Button 

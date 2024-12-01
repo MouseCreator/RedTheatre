@@ -44,23 +44,25 @@ const MyProfile = () => {
 
   return (
     <Container className="mt-4">
-      <h1 className="text-center mb-4">My Tickets</h1>
+      <h1 className="text-center mb-4">Ваші квитки</h1>
       <Row xs={1} md={2} lg={3} className="g-4">
         {tickets.map((ticket) => (
           <Col key={ticket.id}>
             <Card>
               <Card.Body>
-                <Card.Title>{ticket.performanceName}</Card.Title>
+                <Card.Title>
+                    <strong>Вистава: </strong>
+                    {ticket.performanceName}</Card.Title>
                 <Card.Text>
-                  <strong>Theatre:</strong> {ticket.theatreName} <br />
-                  <strong>Date:</strong> {ticket.date} <br />
-                  <strong>Seats:</strong> {ticket.seatNumbers.join(", ")} <br />
-                  <strong>Total Price:</strong> ${ticket.totalPrice} <br />
+                  <strong>Театр: </strong> {ticket.theatreName} <br />
+                  <strong>Дата: </strong> {ticket.date} <br />
+                  <strong>Місця: </strong> {ticket.seatNumbers.join(", ")} <br />
+                  <strong>Сума до оплати: </strong> ${ticket.totalPrice} <br />
                   <Badge
                     bg={ticket.status === "paid" ? "success" : "warning"}
                     className="mt-2"
                   >
-                    {ticket.status === "paid" ? "Paid" : "Unpaid"}
+                    {ticket.status === "paid" ? "Оплачено" : "Неоплачено"}
                   </Badge>
                 </Card.Text>
                 {ticket.status === "unpaid" && (
@@ -69,13 +71,13 @@ const MyProfile = () => {
                       variant="success"
                       onClick={() => handlePay(ticket.id)}
                     >
-                      Pay
+                      Оплатити
                     </Button>
                     <Button
                       variant="danger"
                       onClick={() => handleCancel(ticket.id)}
                     >
-                      Cancel
+                      Скасувати
                     </Button>
                   </div>
                 )}
