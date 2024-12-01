@@ -21,6 +21,12 @@ public class TicketController {
     public List<TicketResponseDTO> getTicketHistory(@RequestAttribute("user")UserDetails userDetails) {
         return ticketHistory.getAllTickets(userDetails);
     }
+
+    @PutMapping
+    public TicketResponseDTO payForTicket(@RequestBody TicketChangeStatusDTO dto,
+                                          @RequestAttribute UserDetails userDetails) {
+        return ticketHistory.updateTicket(userDetails, dto);
+    }
     @PutMapping("/pay/{id}")
     public TicketResponseDTO payForTicket(@PathVariable("id") Long ticket,
                                           @RequestAttribute UserDetails userDetails) {
