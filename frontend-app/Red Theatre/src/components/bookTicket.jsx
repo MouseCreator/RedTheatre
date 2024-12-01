@@ -7,12 +7,13 @@ import BookingModal from "./BookingModal";
 import axios from "axios";
 
 export default function Bookticket() {
-  const { id } = useParams(); // Get the id from the URL
-  const [schedule, setSchedule] = useState(null); // Store schedule data
-  const [seats, setSeats] = useState([]); // Store seat data
+  const { id } = useParams(); 
+  const [schedule, setSchedule] = useState(null); 
+  const [seats, setSeats] = useState([]); 
   const [count, setCount] = useState(0);
   const [price, setPrice] = useState(0);
-  const [isModalVisible, setIsModalVisible] = useState(false); // Modal visibility
+  const [isModalVisible, setIsModalVisible] = useState(false); 
+  const [isCancelModalVisible, setIsCancelModalVisible] = useState(false);
 
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,16 +22,19 @@ export default function Bookticket() {
   const navigate = useNavigate();
   let clicked = false;
 
-  // Fetch schedule and seat data
-  useEffect(() => {
+  const handleFetchSeats = (id) => {
     fetch(`http://localhost:8080/schedule/${id}`)
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched Data:", data);
         setSchedule(data);
-        setSeats(data.seats || []); // Ensure seats array is set
+        setSeats(data.seats || []); 
       })
       .catch((error) => console.error("Error fetching schedule:", error));
+  }
+
+  useEffect(() => {
+    handleFetchSeats(id)
   }, [id]);
   
 
@@ -83,12 +87,20 @@ export default function Bookticket() {
       setErrorMessage(
         error.response?.data?.message || "Failed to create booking."
       );
+
+      handleFetchSeats(id)
+      
       setShowError(true);
     });
   };
 
 
   const handleCancel = (e) => {
+    if(seats.filter((seat) => seat.status === "selected").length){
+      setIsCancelModalVisible(true)
+      return;
+    }
+
     navigate("/")
   };
 
@@ -111,7 +123,7 @@ export default function Bookticket() {
     <div>
     <div className="performance-details-1">
       <div className="performance-header-1">
-        {/* Image Section */}
+ 
         <div className="performance-image-container-1">
           <img
             src={schedule.pictureUrl}
@@ -120,7 +132,6 @@ export default function Bookticket() {
           />
         </div>
 
-        {/* Text Section */}
         <div className="performance-meta-1">
           <h1 className="performance-title-1">{schedule.performanceName}</h1>
           <p>
@@ -143,7 +154,7 @@ export default function Bookticket() {
 
       
   <div className="seat-booking-1">
-  {/* Showcase for Seat Status */}
+
   <ul className="showcase-1">
     <li>
       <div className="seat-1 selected"></div>
@@ -199,10 +210,19 @@ export default function Bookticket() {
   </div>
 </div>
 {isModalVisible ? <BookingModal
-        title="Confirm Booking"
+        title="Підтвердження бронювання"
+        subtitle="Ви впевнені у своєму виборі?"
         show={isModalVisible}
         onConfirm={confirmBooking}
         onClose={closeModal}
+      /> : null}
+
+{isCancelModalVisible ? <BookingModal
+        title="Скасування бронювання"
+        subtitle="Ви впевнені, що хочете скасувати бронювання?"
+        show={isCancelModalVisible}
+        onConfirm={() => navigate('/')}
+        onClose={() => setIsCancelModalVisible(false)}
       /> : null}
 
 <Toast

@@ -26,7 +26,7 @@ function UnifiedNavbar() {
     <Navbar bg="light" expand="lg" className="mb-3">
       <Container fluid>
       <Navbar.Collapse id="navbar-nav" className="w-100 d-flex justify-content-between">
-  <Navbar.Brand href="#" className="me-auto">
+  <Navbar.Brand href="/" className="me-auto">
     Червоний театр
   </Navbar.Brand>
 

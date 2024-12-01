@@ -12,8 +12,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <BrowserRouter> {/* Add this wrapper */}
+    <Navbar1 />
       <Routes>
-        <Route path="/" element={<><Navbar1 /><Slider /><Movies /></>} />
+        <Route path="/" element={<><Slider /><Movies /></>} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/booking/:id" element={<Bookticket />} />
         <Route path="/profile" element={<MyProfile />} />
