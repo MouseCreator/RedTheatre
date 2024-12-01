@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useNavigate, useParams } from "react-router-dom";
 import BookingModal from "./BookingModal";
+import axios from "axios";
 
 export default function Bookticket() {
   const { id } = useParams(); // Get the id from the URL
@@ -60,15 +61,21 @@ export default function Bookticket() {
     setIsModalVisible(false);
 
     const bookingData = {
-      scheduleId: id,
-      selectedSeats: seats.filter((seat) => seat.status === "selected").map((seat)=>seat.position),
+      performanceId: id,
+      seats: seats.filter((seat) => seat.status === "selected").map((seat)=>seat.position),
     };
 
-    fetch("http://localhost:8080/booking", {
-      method: "POST",
+    axios.post("http://localhost:8080/booking", bookingData, {
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bookingData),
-    });
+    })
+      .then((response) => {
+        console.log("Booking successful:", response.data);
+        navigate('/profile')
+      })
+      .catch((error) => {
+        console.error("Error creating booking:", error);
+      });
+    
   };
 
 
