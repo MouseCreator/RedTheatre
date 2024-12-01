@@ -2,6 +2,7 @@ import "../booking.css";
 import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useNavigate, useParams } from "react-router-dom";
+import BookingModal from "./BookingModal";
 
 export default function Bookticket() {
   const { id } = useParams(); // Get the id from the URL
@@ -9,6 +10,7 @@ export default function Bookticket() {
   const [seats, setSeats] = useState([]); // Store seat data
   const [count, setCount] = useState(0);
   const [price, setPrice] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false); // Modal visibility
   const ref = useRef(null);
   const navigate = useNavigate();
   let clicked = false;
@@ -41,15 +43,22 @@ export default function Bookticket() {
     setPrice(isSelected ? price - seat.price : price + seat.price);
   };
 
-  // Handle booking
-  const handleBooking = (e) => {
-    if (clicked || count === 0) return;
-    clicked = true;
-    e.target.innerText = "";
-    gsap.to("#button", { width: "50px", duration: 0.5 });
-    setTimeout(() => navigate("/"), 3000);
+  const openModal = () => {
+    console.log("count", count)
+    if (count > 0) {
+      setIsModalVisible(true);
+      console.log(isModalVisible)
+    }
+  };
 
-    // Send booking data to the server
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
+  const confirmBooking = () => {
+  
+    setIsModalVisible(false);
+    
     const bookingData = {
       scheduleId: id,
       totalPrice: price,
@@ -64,15 +73,15 @@ export default function Bookticket() {
     });
   };
 
+
   const handleCancel = (e) => {
     navigate("/")
   };
 
 
-  // Render seat rows dynamically
   const renderRows = () => {
     const rows = [];
-    const seatsPerRow = 10; // Adjust based on your layout
+    const seatsPerRow = 10;
     for (let i = 0; i < seats.length; i += seatsPerRow) {
       rows.push(seats.slice(i, i + seatsPerRow));
     }
@@ -164,18 +173,24 @@ export default function Bookticket() {
       <strong>Обрані місця:</strong> <span id="count">{count}</span>
     </p>
     <p className="text">
-      <strong>Загальна ціна:</strong> ₹<span id="total">{price}</span>
+      <strong>Загальна ціна:</strong> $<span id="total">{price}</span>
     </p>
-    <button className="book-button-1" onClick={handleBooking}>
-      Забронювати
-      <span ref={ref} className="checkmark">✓</span>
-    </button>
+    <button className="book-button-1" onClick={openModal}>
+          Забронювати
+        </button>
     <button className="book-button-1" onClick={handleCancel}>
       Повернутися до вистав
     
     </button>
   </div>
 </div>
+{isModalVisible ? <BookingModal
+        title="Confirm Booking"
+        show={isModalVisible}
+        onConfirm={confirmBooking}
+        onClose={closeModal}
+      /> : null}
+
 
     </div>
   );

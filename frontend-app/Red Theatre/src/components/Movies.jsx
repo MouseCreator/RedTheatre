@@ -59,7 +59,7 @@ function Movies() {
                 variant="primary"
                 onClick={() => handleRedirect(performance.id)}
                 >
-                Book Tickets</Button>
+                Забронювати квитки</Button>
               </Card.Body>
             </Card>
           </Col>
