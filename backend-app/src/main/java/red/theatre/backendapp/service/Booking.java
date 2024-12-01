@@ -32,6 +32,7 @@ public class Booking {
     @Transactional
     public TicketResponseDTO bookSeats(UserDetails userDetails, BookingCreateDTO bookingCreateDTO) {
         Long userId = userDetails.getId();
+        UD.validateClient(userDetails);
         User user = userRepository.findById(userId).orElseThrow(
                 ()-> new DataNotFoundException("Користувача " + userDetails.getLogin() + " не знайдено!"));
         List<Long> seatIds = bookingCreateDTO.getSeats();
