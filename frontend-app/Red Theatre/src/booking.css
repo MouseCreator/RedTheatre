@@ -1,0 +1,185 @@
+/* @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap'); */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body1 {
+    font-family: "Lato", sans-serif;
+    /* background-color: #242333; */
+    /* background: url("myke-simon-atsUqIm3wxo-unsplash.jpg"),
+          linear-gradient(rgba(0, 0, 0, .9), rgba(0, 0, 0, 0.9)); */
+    background: (#8b5edd), bottom;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: hsla(0, 0%, 0%, 1);
+    padding-top: 25px;
+  }
+
+  .performance-details-1 {
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+}
+
+.performance-header-1 {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px; /* Space between image and text */
+}
+
+.performance-image-container-1 {
+  flex: 1; /* Allows the image to take 1 portion of the available space */
+  max-width: 300px; /* Sets a maximum width for the image */
+}
+
+.performance-image-1 {
+  width: 100%; /* Ensures the image scales properly */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.performance-meta {
+  flex: 2; /* Allows the text to take 2 portions of the available space */
+  text-align: left;
+}
+
+.performance-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.performance-meta p {
+  font-size: 1rem;
+  margin: 5px 0;
+  line-height: 1.6;
+}
+
+  
+.seat-booking-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .container-1 {
+    max-width: 100%;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .row-container-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .row-1 {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+
+.showcase-1 {
+  list-style: none;
+  padding: 0;
+  flex: 1; /* Allocate space for the seat showcase */
+}
+
+.showcase-1 li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.showcase-1 .seat {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.showcase-1 .selected {
+  background-color: #6c757d;
+}
+
+.showcase-1 .reserved {
+  background-color: #dc3545;
+}
+
+.showcase-1 .free {
+  background-color: #28a745;
+}
+
+.movie-screen-1 {
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 5px 0;
+  
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+
+
+.seat-1 {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.seat-1.selected {
+  background-color: #0d3559;
+}
+
+.seat-1.reserved {
+  background-color: #757071;
+  pointer-events: none; /* Prevent clicking on reserved seats */
+}
+
+.seat-1.free {
+  background-color: #3f73bc;
+}
+
+.text-wrapper-1 {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+    gap: 10px; /* Add space between the buttons */
+    align-items: center; /* Center-align the buttons horizontally */
+  }
+  
+  .book-button-1 {
+    margin-top: 0; /* Remove any additional top margin */
+    background-color: #0d3559;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .book-button-1:hover {
+    background-color: #184f80;
+  }
+  
