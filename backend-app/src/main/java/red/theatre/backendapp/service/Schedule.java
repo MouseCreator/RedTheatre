@@ -67,6 +67,10 @@ public class Schedule {
         String date = performanceCreateDTO.getDate();
         LocalDateTime localDateTime = dates.stringToDate(date);
         performance.setTimeDate(localDateTime);
+        Long directorId = performanceCreateDTO.getDirector();
+        Figure director = figureRepository.findById(directorId)
+                .orElseThrow(() -> new DataNotFoundException("Неможливо знайти режисера з ідентифікатором " + directorId));
+        performance.setDirector(director);
 
         return performanceRepository.save(performance);
     }

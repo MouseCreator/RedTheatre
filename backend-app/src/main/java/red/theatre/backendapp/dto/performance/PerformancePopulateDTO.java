@@ -2,13 +2,11 @@ package red.theatre.backendapp.dto.performance;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class PerformanceCreateDTO {
+public class PerformancePopulateDTO {
     private Long theatreId;
     private Long detailsId;
     private String date;
-    private Long director;
-    private List<Long> figures;
+    private String director;
+    private Long numberFigures;
 }
