@@ -26,8 +26,8 @@ public class BookingController {
     }
 
     @PostMapping
-    public ResponseEntity<TicketResponseDTO> createTicket(@RequestBody BookingCreateDTO bookingCreateDTO,
-                                                          @RequestAttribute("user") UserDetails userDetails) {
+    public ResponseEntity<TicketResponseDTO> bookTicket(@RequestBody BookingCreateDTO bookingCreateDTO,
+                                                        @RequestAttribute("user") UserDetails userDetails) {
         TicketResponseDTO responseDTO = booking.bookSeats(userDetails, bookingCreateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }

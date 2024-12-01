@@ -12,15 +12,15 @@ public class UserDetailsFactory {
     public UserDetails client() {
         UserDetails userDetails = new UserDetails();
         userDetails.setRole(UseRoles.CLIENT);
-        userDetails.setId(1L);
+        userDetails.setId(7L);
         userDetails.setLogin("Петро");
         return userDetails;
     }
     public UserDetails admin() {
         UserDetails userDetails = new UserDetails();
         userDetails.setRole(UseRoles.ADMIN);
-        userDetails.setId(1L);
-        userDetails.setLogin("Петро");
+        userDetails.setId(8L);
+        userDetails.setLogin("Іван");
         return userDetails;
     }
 }

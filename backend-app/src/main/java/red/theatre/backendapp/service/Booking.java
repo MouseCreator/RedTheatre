@@ -22,6 +22,7 @@ import red.theatre.backendapp.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -36,14 +37,23 @@ public class Booking {
         UD.validateClient(userDetails);
         User user = userRepository.findById(userId).orElseThrow(
                 ()-> new DataNotFoundException("Користувача " + userDetails.getLogin() + " не знайдено!"));
-        List<Long> seatIds = bookingCreateDTO.getSeats();
-        if (seatIds.isEmpty()) {
-            throw new ValidationException("Неможливо забронювати 0 місць. Оберіть місця для бронювання");
+        List<Integer> seatPositions = bookingCreateDTO.getSeats();
+        Long performanceId = bookingCreateDTO.getPerformanceId();
+        if (performanceId == null) {
+            throw new ValidationException("Неможливо забронювати! Не вказана вистава!");
         }
-        if (seatIds.size() > 100) {
+        if (seatPositions == null) {
+            throw new ValidationException("Неможливо забронювати! Не вказано місця.");
+        }
+        seatPositions = seatPositions.stream().filter(Objects::nonNull).toList();
+        if (seatPositions.isEmpty()) {
+            throw new ValidationException("Неможливо забронювати! Не вказано жодного місця для бронювання.");
+        }
+        if (seatPositions.size() > 100) {
             throw new ValidationException("Неможливо забронювати понад 100 місць.");
         }
-        List<Seat> seats = seatRepository.findAllById(seatIds);
+        seatPositions = seatPositions.stream().distinct().toList();
+        List<Seat> seats = seatRepository.findAllByPerformanceAndPositions(seatPositions);
 
         validateSeats(seats);
         reserveAll(seats);

@@ -6,5 +6,6 @@ import java.util.List;
 
 @Data
 public class BookingCreateDTO {
-    private List<Long> seats;
+    private Long performanceId;
+    private List<Integer> seats;
 }

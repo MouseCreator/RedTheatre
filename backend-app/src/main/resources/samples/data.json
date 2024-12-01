@@ -28,7 +28,7 @@
       "name": "Національний академічний театр опери та балету України імені Тараса Шевченка",
       "description": "Театр 5",
       "address": "Вулиця 5",
-      "numSeats": 100
+      "numSeats": 110
     }
   ],
   "performance_details": [
@@ -214,6 +214,14 @@
     {
       "name": "Вона",
       "role": "client"
+    },
+    {
+      "name": "Петро",
+      "role": "client"
+    },
+    {
+      "name": "Іван",
+      "role": "admin"
     }
   ],
   "tickets": [
