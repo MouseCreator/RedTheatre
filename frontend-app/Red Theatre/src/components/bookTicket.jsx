@@ -200,12 +200,11 @@ export default function Bookticket() {
     <p className="text">
       <strong>Загальна ціна:</strong> $<span id="total">{price}</span>
     </p>
-    <button className="book-button-1" onClick={openModal}>
+     <button className={`book-button-1 ${ count === 0 && "inactive" }`} onClick={openModal}>
           Забронювати
-        </button>
+      </button>
     <button className="book-button-1" onClick={handleCancel}>
-      Повернутися до вистав
-    
+        Повернутися до вистав
     </button>
   </div>
 </div>

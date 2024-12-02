@@ -170,7 +170,7 @@
   
   .book-button-1 {
     margin-top: 0; /* Remove any additional top margin */
-    background-color: #0d3559;
+    background-color:#0d3559;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -178,8 +178,15 @@
     font-size: 16px;
     cursor: pointer;
   }
-  
+  .book-button-1.inactive {
+    background-color: #757071;
+    cursor: default;
+  }
+
   .book-button-1:hover {
     background-color: #184f80;
   }
+.book-button-1.inactive:hover {
+  background-color: #757071;
+}
   
