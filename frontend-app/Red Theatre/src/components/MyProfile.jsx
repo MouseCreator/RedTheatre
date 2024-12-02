@@ -45,6 +45,9 @@ const MyProfile = () => {
   return (
     <Container className="mt-4">
       <h1 className="text-center mb-4">Ваші квитки</h1>
+        {
+            tickets.length === 0 ?
+                <p className="text-center">У вас немає жодного квитка</p> :
       <Row xs={1} md={2} lg={3} className="g-4">
         {tickets.map((ticket) => (
           <Col key={ticket.id}>
@@ -86,6 +89,7 @@ const MyProfile = () => {
           </Col>
         ))}
       </Row>
+        }
     </Container>
   );
 };
