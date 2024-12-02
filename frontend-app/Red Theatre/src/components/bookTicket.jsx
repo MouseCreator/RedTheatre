@@ -28,7 +28,18 @@ export default function Bookticket() {
       .then((data) => {
         console.log("Fetched Data:", data);
         setSchedule(data);
-        setSeats(data.seats || []); 
+        const newSeats = data.seats  || []
+        if (seats.length === newSeats.length) {
+          for (let i = 0; i < newSeats.length; i++) {
+            if (newSeats[i].status === "reserved") {
+              continue;
+            }
+            if (seats[i].status === "selected") {
+              newSeats[i].status = "selected"
+            }
+          }
+        }
+        setSeats(newSeats);
       })
       .catch((error) => console.error("Error fetching schedule:", error));
   }
