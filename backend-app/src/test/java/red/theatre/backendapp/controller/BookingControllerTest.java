@@ -14,6 +14,7 @@ import red.theatre.backendapp.exception.AuthForbiddenException;
 import red.theatre.backendapp.exception.AuthUnauthorizedException;
 import red.theatre.backendapp.exception.DataNotFoundException;
 import red.theatre.backendapp.exception.ValidationException;
+import red.theatre.backendapp.utils.JSON;
 import red.theatre.backendapp.utils.UserDetailsFactory;
 
 import java.math.BigDecimal;
@@ -31,11 +32,15 @@ class BookingControllerTest {
     @Test
     void getPerformanceById_ok() {
         UserDetails userDetails = factory.client();
-        long expectId = 1L;
-        ResponseEntity<FullPerformanceResponseDTO> entity = bookingController.getBookingPerformanceById(expectId, userDetails);
-        assertEquals(HttpStatus.OK, entity.getStatusCode());
-        FullPerformanceResponseDTO body = entity.getBody();
-        assertEquals(expectId, body.getId());
+        List<Long> testOnIds = List.of(1L, 2L, 5L, 7L, 8L);
+        for (Long expectId : testOnIds) {
+            ResponseEntity<FullPerformanceResponseDTO> entity = bookingController.getBookingPerformanceById(expectId, userDetails);
+            assertEquals(HttpStatus.OK, entity.getStatusCode());
+            FullPerformanceResponseDTO body = entity.getBody();
+            String json = JSON.stringify(body);
+            assertNotNull(json);
+            assertEquals(expectId, body.getId());
+        }
     }
 
     @Test
