@@ -91,15 +91,17 @@ class BookingControllerTest {
     @Test
     void getPerformanceById_userNull() {
         long expectId = 1L;
-        assertThrows(AuthUnauthorizedException.class,
+        AuthUnauthorizedException aException = assertThrows(AuthUnauthorizedException.class,
                 () -> bookingController.getBookingPerformanceById(expectId, null));
+        assertEquals("Користувач не авторизований", aException.getMessage());
     }
     @Test
     void getPerformanceById_userGuest() {
         UserDetails userDetails = factory.guest();
         long expectId = 1L;
-        assertThrows(AuthUnauthorizedException.class,
+        AuthUnauthorizedException aException = assertThrows(AuthUnauthorizedException.class,
                 () -> bookingController.getBookingPerformanceById(expectId, userDetails));
+        assertEquals("Користувач не авторизований", aException.getMessage());
     }
 
     @Test
@@ -128,7 +130,6 @@ class BookingControllerTest {
         UserDetails userDetails = factory.client();
         assertThrows(ValidationException.class, () -> bookingController.bookTicket(null, userDetails));
     }
-
     @Test
     void bookTicket_101() {
         UserDetails userDetails = factory.client();
@@ -139,38 +140,43 @@ class BookingControllerTest {
             seats.add(i);
         }
         bookingCreateDTO.setSeats(seats);
-        assertThrows(ValidationException.class,
+        ValidationException vException = assertThrows(ValidationException.class,
                 () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+        assertEquals("Неможливо забронювати понад 100 місць.", vException.getMessage());
     }
 
     @Test
     void bookTicket_negativeSeatPosition() {
         UserDetails userDetails = factory.client();
         BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(-1));
-        assertThrows(DataNotFoundException.class,
+        DataNotFoundException dException = assertThrows(DataNotFoundException.class,
                 () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+        assertEquals("Театральний зал не має місця з номером -1", dException.getMessage());
     }
 
     @Test
     void bookTicket_overflowSeatPosition() {
         UserDetails userDetails = factory.client();
         BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(1000));
-        assertThrows(DataNotFoundException.class,
+        DataNotFoundException dException = assertThrows(DataNotFoundException.class,
                 () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+        assertEquals("Театральний зал не має місця з номером 1000", dException.getMessage());
     }
     @Test
     void bookTicket_negativePerformance() {
         UserDetails userDetails = factory.client();
         BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(-1L, List.of(1));
-        assertThrows(DataNotFoundException.class,
+        DataNotFoundException dException = assertThrows(DataNotFoundException.class,
                 () -> bookingController.bookTicket(bookingCreateDTO, userDetails));
+        assertEquals("Не знайдено виставу з ідентифікатором -1", dException.getMessage());
     }
 
     @Test
     void bookTicket_emptyAuth() {
         BookingCreateDTO bookingCreateDTO = new BookingCreateDTO(1L, List.of(1));
-        assertThrows(AuthUnauthorizedException.class,
+        AuthUnauthorizedException authException = assertThrows(AuthUnauthorizedException.class,
                 () -> bookingController.bookTicket(bookingCreateDTO, null));
+        assertEquals("Користувач не авторизований", authException.getMessage());
     }
 
     @Test
